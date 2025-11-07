@@ -1,0 +1,1 @@
+# handler uses standard libraries; no external dependencies needed
