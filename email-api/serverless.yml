@@ -1,0 +1,29 @@
+service: email-api
+app: email-api-dashboard # <-- the name you want for your App in Serverless Dashboard
+org: raghuram007serverless 
+
+provider:
+  name: aws
+  runtime: python3.9
+  environment:
+    SENDER_EMAIL: "steveharrigontan@gmail.com"
+    SMTP_USERNAME: "5299eca6d226c8"
+    SMTP_PASSWORD: "0fccd648e07243"
+    SMTP_HOST: "smtp.mailtrap.io"
+    SMTP_PORT: 587
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    noPrependStageInUrl: true  # optional, makes URL: /send-email instead of /dev/send-email
+
+functions:
+  sendEmail:
+    handler: handler.send_email
+    timeout: 30
+    events:
+      - http:
+          path: send-email
+          method: post
